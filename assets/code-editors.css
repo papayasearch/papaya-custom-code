@@ -1,0 +1,26 @@
+.pcc-dashboard .CodeMirror {
+    border: 1px solid #8c8f94;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 100%;
+}
+.pcc-dashboard .CodeMirror-focused {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+}
+.pcc-dashboard .CodeMirror-gutters {
+    background: #f6f7f7;
+    border-right: 1px solid #dcdcde;
+}
+.pcc-editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    margin: 8px 0;
+}
+.pcc-editor-toolbar span {
+    color: #50575e;
+    font-size: 12px;
+}

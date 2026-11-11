@@ -1,0 +1,22 @@
+name: Build plugin release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Validate and package
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          find . -name '*.php' -print0 | xargs -0 -n1 php -l
+          python3 build-release.py
+      - name: Create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: gh release create "$RELEASE_TAG" dist/papaya-custom-code.zip dist/SHA256SUMS --draft --verify-tag --title "$RELEASE_TAG" --generate-notes
