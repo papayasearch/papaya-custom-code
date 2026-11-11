@@ -34,12 +34,12 @@ function pcc_enqueue_code_editors($hook_suffix) {
             $editors[$id] = $settings;
         }
     }
-    wp_enqueue_style('pcc-code-editors', plugin_dir_url(__FILE__) . 'assets/code-editors.css', array(), '2.6');
+    wp_enqueue_style('pcc-code-editors', plugin_dir_url(__FILE__) . 'assets/code-editors.css', array(), '2.6.1');
     if (empty($editors)) {
         add_action('admin_notices', 'pcc_code_editor_preference_notice');
         return;
     }
-    wp_enqueue_script('pcc-code-editors', plugin_dir_url(__FILE__) . 'assets/code-editors.js', array('jquery', 'code-editor'), '2.6', true);
+    wp_enqueue_script('pcc-code-editors', plugin_dir_url(__FILE__) . 'assets/code-editors.js', array('jquery', 'code-editor'), '2.6.1', true);
     wp_add_inline_script('pcc-code-editors', 'window.pccCodeEditors = ' . wp_json_encode($editors) . ';', 'before');
 }
 
