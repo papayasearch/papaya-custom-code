@@ -1,4 +1,4 @@
-Papaya Custom Code 2.6
+Papaya Custom Code 2.6.1
 Requires WordPress 5.8+ and PHP 7.4+.
 
 FIRST UPGRADE FROM 2.1 / 2.2 / 2.3 / 2.4
@@ -77,38 +77,35 @@ See the accompanying verification report for the checks performed. This is
 security hardening, not a guarantee that arbitrary snippets are safe or an
 independent penetration test of your live hosting environment.
 
-GITHUB UPDATES
-Repository: https://github.com/papayasearch/papaya-custom-code (private).
+GITHUB UPDATES (2.6.1)
+Repository: https://github.com/papayasearch/papaya-custom-code (public).
+No GitHub token is required on installed sites. Remove the PCC_GITHUB_TOKEN
+line from wp-config.php if you previously added it solely for this plugin.
+An existing configured token remains optional; unauthenticated checks use
+GitHub's public API limits, which may be shared by sites on one hosting IP.
 Updater: Plugin Update Checker v6.0, bundled under its MIT license.
-Updates use published, non-prerelease GitHub Releases with an attached
-asset named exactly papaya-custom-code.zip. Branch commits and bare tags
-are never offered as updates. WordPress checks periodically (normally
-about every 12 hours); use Plugins > Check for updates for a manual check.
-WordPress or your host controls whether an available update installs
-automatically. This plugin does not force auto-updates on.
+Only published, non-prerelease GitHub Releases with an attached asset named
+papaya-custom-code.zip are offered. No branch snapshots or bare tags.
+WordPress checks periodically (normally about every 12 hours). Plugins >
+Check for updates starts a manual check. WordPress/your host controls
+whether available updates install automatically; this plugin does not
+force auto-updates on.
 
-ONE-TIME SETUP PER SITE
-Before upgrading from 2.3/2.4, back up CSS/JS and restore them in the new
-editors as described above. New storage and stricter permissions from 2.5
-are included; external CSS, JavaScript in the footer, and editors remain.
-Create a GitHub fine-grained personal access token restricted to this
-repository, with Contents: Read-only (Metadata read is automatic). Your
-organization may require approval or SSO authorization. Store the token
-only in server configuration, never in the repository or a release ZIP.
-Before WordPress loads in wp-config.php, set:
-    define('PCC_GITHUB_TOKEN', 'YOUR_READ_ONLY_TOKEN');
-Do not add a duplicate definition. Rotate expiring/revoked tokens as needed.
-No token is bundled, displayed, or accepted through this plugin's forms.
-Never send a token in chat. The installed updater uses it to authenticate
-GitHub metadata and private release-asset downloads.
-Install the updater-enabled ZIP manually once on each site. Restore and
-save CSS/JS, then verify the external files and clear caches. Future updates
-retain the database/uploads storage. If updates do not appear, check token
-permissions/expiry, organization approval, WP cron and outbound API access.
+INSTALL ONCE
+Manually install the updater-enabled ZIP once on each site. Before upgrading
+from 2.3/2.4, copy CSS/JS, restore and save them afterward, and clear caches.
+Versions 2.5/2.6 already store CSS/JS in the database/uploads. Back up your
+site as usual. The stricter editing permissions and external CSS loading
+from 2.5 remain. If Remove Unused CSS is enabled in Perfmatters, use the
+Excluded Stylesheets entry /papaya-custom-code/site- . If disabled, leave it
+disabled. Installation is not proof an update check/download has succeeded.
 
-PUBLISHING
-Change the Version header, commit, and create a matching tag such as v2.7.
-The release workflow builds the ZIP and SHA256SUMS, then creates a draft
-GitHub Release. Review/download/test the artifact before publishing it.
-A draft or prerelease is not offered to installed sites. Protect repository
-write access: publishing a release distributes executable code to sites.
+RELEASES
+Bump the Version header and create a matching v-prefixed tag (v2.6.1).
+Alternatively, open Actions > Build plugin release > Run workflow and enter
+the matching tag. The workflow packages the plugin and creates a draft
+release with papaya-custom-code.zip and SHA256SUMS. Review/test and publish
+the draft to offer it to installed sites. Drafts/prereleases are ignored.
+The workflow uses GitHub's built-in GITHUB_TOKEN for publishing; website
+administrators do not need to create or install personal tokens.
+Protect repository write access: published updates contain executable code.
