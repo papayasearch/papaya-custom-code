@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Papaya Custom Code
  * Description: Custom CSS, JavaScript, and optional PHP via an integrated dashboard.
- * Version: 2.6
+ * Version: 2.6.1
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Update URI: https://github.com/papayasearch/papaya-custom-code/
