@@ -2,6 +2,12 @@ name: Build plugin release
 on:
   push:
     tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag matching the plugin version, e.g. v2.6'
+        required: true
+        default: 'v2.6'
 permissions:
   contents: write
 jobs:
@@ -11,12 +17,12 @@ jobs:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Validate and package
         env:
-          RELEASE_TAG: ${{ github.ref_name }}
+          RELEASE_TAG: ${{ github.event.inputs.tag || github.ref_name }}
         run: |
           find . -name '*.php' -print0 | xargs -0 -n1 php -l
           python3 build-release.py
       - name: Create draft release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ github.ref_name }}
-        run: gh release create "$RELEASE_TAG" dist/papaya-custom-code.zip dist/SHA256SUMS --draft --verify-tag --title "$RELEASE_TAG" --generate-notes
+          RELEASE_TAG: ${{ github.event.inputs.tag || github.ref_name }}
+        run: gh release create "$RELEASE_TAG" dist/papaya-custom-code.zip dist/SHA256SUMS --draft --target "$GITHUB_SHA" --title "$RELEASE_TAG" --generate-notes
